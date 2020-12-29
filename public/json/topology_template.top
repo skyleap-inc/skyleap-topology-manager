@@ -1,0 +1,39 @@
+{
+  "groups": {
+  	"executives": {
+  		"jeff": {
+    		"links": ["alex", "serg", "andrei"]
+    	},
+	    "serg": {
+	    	"links": ["alex", "jeff", "andrei"]
+	    },
+	    "andrei": {
+	    	"links": ["alex", "serg", "jeff"]
+	    },
+	    "luda": {
+	    	"links": ["alex"]
+	    },
+	    "alex": {
+	    	"links": ["jeff", "andrei", "luda", "serg", "tom"]
+	    }
+  	},
+  	"salesmen": {
+  		"tom": {
+    		"links": ["alex"]
+    	},
+	    "sarah": {
+	    	"links": []
+	    },
+	    "bob": {
+	    	"links": []
+	    },
+	    "shannon": {
+	    	"links": []
+	    },
+	    "doug": {
+	    	"links": []
+	    }
+  	}
+  },
+  "version": "0.1"
+}

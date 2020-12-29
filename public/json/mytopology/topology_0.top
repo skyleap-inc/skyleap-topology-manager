@@ -1,0 +1,10 @@
+{
+  "nodes": {
+    "Jeff[000]"   :["Alex","Serg","Andrei"],
+    "Serg[001]"   :["Alex","Jeff","Andrei"],
+    "Andrei[002]" :["Alex","Serg","Jeff"],
+    "Luda"        :["Alex"],
+    "Alex"        :["Jeff","Andrei","Luda","Serg"]
+  },
+  "version":"0.1"
+}

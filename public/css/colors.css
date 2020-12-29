@@ -1,0 +1,25 @@
+.sete-colorPrimary {
+    background-color: #3f4c6b;
+}
+.sete-colorPrimaryDark {
+    background-color: #293132;
+}
+.sete-colorAccent {
+    background-color: #b29245;
+}
+.sete-colorAccentDark {
+    background-color: #ffc640;
+}
+.sete-colorSuccessGreen {
+    background-color: #C2F970;
+}
+.sete-colorFailureRed {
+    background-color: #DD403A;
+}
+
+.sete-textColorSuccessGreen {
+    color: #C2F970 !important;
+}
+.sete-textColorFailureRed {
+    color: #DD403A !important;
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Skyleap - Topology Manager</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="public/css/base.css">
+  <link rel="stylesheet" href="public/css/colors.css">
+  <!-- 
+    Libraries:
+    - D3
+    - jQuery
+    - Bootstrap
+    - MDB - Material Design Bootstrap
+  -->
+</head>
+<body>
+
+  <!-- CONTENT WRAPPER -->
+  <div id="content-wrapper" style="opacity: 0">
+    <!-- SIDE BAR -->
+    <div id="sidebar">
+        <i data-action="select" class="sidebar-button sidebar-button-selected fa fa-mouse-pointer" aria-hidden="true"></i>
+        <br><br>
+        <i data-action="link" class="sidebar-button fa fa-link" aria-hidden="true"></i>
+        <br><br>
+        <i data-action="unlink" class="sidebar-button fa fa-chain-broken" aria-hidden="true"></i>
+        <br>
+    </div>
+    <!-- D3 -->
+    <svg id="d3-svg"></svg>
+    <!-- TOPOLOGY NAME LABEL -->
+    <div id="topology-name-label">Topology Name: Unknown</div>
+    <!-- SELECT MODE LABEL -->
+    <div id="select-mode-label">Selection Mode: Default</div>
+    <!-- PROPERTIES -->
+    <div id="node-properties">
+      <div id="node-properties-header">Actions</div>
+      <div id="node-properties-content">
+        <span id="selected-name"></span>
+        <br>
+        <br>
+        <button id="add-contact" type="button" class="btn sete-colorPrimary hidden-initially">Add Contact</button>
+        <button id="change-group" type="button" class="btn sete-colorPrimary hidden-initially">Change Group</button>
+        <button id="delete" type="button" class="btn sete-colorPrimary hidden-initially">Delete</button>
+      </div>
+    </div>
+    <!-- OTHER ACTIONS -->
+  </div>
+
+  <!-- SPINNER -->
+  <i id="spinner" class="fa fa-spin fa-5x" style="opacity: 0"></i>
+
+  <!-- WELCOME MODAL -->
+  <div class="modal fade" id="welcome-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><img src="public/img/icon.png" class="modal-icon" /> Skyleap - Topology Manager</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn sete-colorPrimary" id="load-existing">Load Existing</button>
+          <button type="button" class="btn sete-colorPrimary" id="new-topology">New Topology</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOAD MODAL -->
+  <div class="modal fade" id="load-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><img src="public/img/icon.png" class="modal-icon" /> Load Existing</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="file-field">
+                    <input type="file" id="file-chooser"/>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn sete-colorPrimary" id="load">Load</button>
+            <button type="button" class="btn grey darken-1 cancel-modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW MODAL -->
+    <div class="modal fade" id="new-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><img src="public/img/icon.png" class="modal-icon" /> New Topology</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="file-field">
+                    <input type="text" placeholder="Enter a name (eg. My Topology)"/>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn sete-colorPrimary" id="new">Create</button>
+            <button type="button" class="btn grey darken-1 cancel-modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GENERAL INPUT MODAL -->
+    <div class="modal fade" id="general-input-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><img src="public/img/icon.png" class="modal-icon" /> <span id="general-input-modal-title"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="file-field">
+                  <input type="text" id="general-input-modal-text"/>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn sete-colorPrimary" id="general-ok">Ok</button>
+            <button type="button" class="btn grey darken-1 cancel-modal" id="general-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="result-overlay">
+      <div id="result-inner">
+        <i id="close-result-overlay" class="fa fa-window-close" aria-hidden="true"></i>
+        <textarea></textarea>
+      </div>
+    </div>
+
+    <button id="view-json" type="button" class="btn sete-colorPrimary">View JSON</button>
+
+<!-- Insert this line above script imports  -->
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="public/js/globals.js"></script>
+<script src="public/js/topgen.js"></script>
+<script src="public/js/renderer.js"></script>
+
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>
+
+</body>
+</html>
